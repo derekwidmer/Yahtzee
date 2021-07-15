@@ -1,16 +1,27 @@
 import React, { Component } from "react";
 import "./Die.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDiceOne, faDiceTwo, faDiceThree, faDiceFour, faDiceFive, faDiceSix } from '@fortawesome/free-solid-svg-icons'
 
 class Die extends Component {
   render() {
+
+    let icon;
+    switch (this.props.val) {
+      case 1: icon = faDiceOne; break;
+      case 2: icon = faDiceTwo; break;
+      case 3: icon = faDiceThree; break;
+      case 4: icon = faDiceFour; break;
+      case 5: icon = faDiceFive; break;
+      case 6: icon = faDiceSix; break;
+      default: icon = null;
+    }
     return (
-      <button
-        className={"Die"}
-        style={{ backgroundColor: this.props.locked ? "grey" : "black" }}
+      <FontAwesomeIcon
+        className={`Die ${this.props.locked ? 'Die-locked' : ''}`}
+        icon={icon}
         onClick={this.props.handleClick}
-      >
-        {this.props.val}
-      </button>
+      />
     );
   }
 }

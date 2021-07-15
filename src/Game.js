@@ -36,13 +36,15 @@ class Game extends Component {
 
   roll(evt) {
     // roll dice whose indexes are in reroll
-    this.setState(st => ({
-      dice: st.dice.map((d, i) =>
-        st.locked[i] ? d : Math.ceil(Math.random() * 6)
-      ),
-      locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
-      rollsLeft: st.rollsLeft - 1
-    }));
+    if (this.state.rollsLeft > 0) {
+      this.setState(st => ({
+        dice: st.dice.map((d, i) =>
+          st.locked[i] ? d : Math.ceil(Math.random() * 6)
+        ),
+        locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
+        rollsLeft: st.rollsLeft - 1
+      }));
+    }
   }
 
   toggleLocked(idx) {
@@ -67,6 +69,7 @@ class Game extends Component {
   }
 
   render() {
+    const disabled = this.state.locked.every(x => x) || this.state.rollsLeft === 0;
     return (
       <div className='Game'>
         <header className='Game-header'>
@@ -81,7 +84,7 @@ class Game extends Component {
             <div className='Game-button-wrapper'>
               <button
                 className='Game-reroll'
-                disabled={this.state.locked.every(x => x)}
+                disabled={disabled}
                 onClick={this.roll}
               >
                 {this.state.rollsLeft} Rerolls Left
