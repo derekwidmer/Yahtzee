@@ -50,6 +50,10 @@ class Game extends Component {
     }
   }
 
+  componentDidMount() {
+    this.animateRoll()
+  }
+
   animateRoll(evt) {
     this.setState({ rolling: true }, () => {
       setTimeout(this.roll, 1000)
