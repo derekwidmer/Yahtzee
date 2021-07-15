@@ -18,7 +18,7 @@ class Die extends Component {
     }
     return (
       <FontAwesomeIcon
-        className={`Die ${this.props.locked ? 'Die-locked' : ''} ${this.props.rolling ? 'Die-rolling' : ''}`}
+        className={`Die ${this.props.locked ? 'Die-locked' : ''} ${this.props.rolling && !this.props.locked ? 'Die-rolling' : ''}`}
         icon={icon}
         onClick={!this.props.rolling ? this.props.handleClick : null}
       />

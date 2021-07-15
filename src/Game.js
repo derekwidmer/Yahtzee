@@ -51,7 +51,7 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    this.animateRoll()
+    this.animateRoll() 
   }
 
   animateRoll(evt) {
