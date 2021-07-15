@@ -82,7 +82,7 @@ class Game extends Component {
   }
 
   render() {
-    const disabled = this.state.locked.every(x => x) || this.state.rollsLeft === 0;
+    const disabled = this.state.locked.every(x => x) || this.state.rollsLeft === 0 || this.state.rolling;
     const rerollText = this.state.rollsLeft === 1 ? 'Reroll Left' : 'Rerolls Left'
     return (
       <div className='Game'>
