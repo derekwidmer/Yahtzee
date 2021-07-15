@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Die.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDiceOne, faDiceTwo, faDiceThree, faDiceFour, faDiceFive, faDiceSix } from '@fortawesome/free-solid-svg-icons'
+import { faDiceOne, faDiceTwo, faDiceThree, faDiceFour, faDiceFive, faDiceSix, faDice } from '@fortawesome/free-solid-svg-icons'
 
 class Die extends Component {
   render() {
@@ -14,13 +14,13 @@ class Die extends Component {
       case 4: icon = faDiceFour; break;
       case 5: icon = faDiceFive; break;
       case 6: icon = faDiceSix; break;
-      default: icon = null;
+      default: icon = faDiceOne;
     }
     return (
       <FontAwesomeIcon
-        className={`Die ${this.props.locked ? 'Die-locked' : ''}`}
+        className={`Die ${this.props.locked ? 'Die-locked' : ''} ${this.props.rolling ? 'Die-rolling' : ''}`}
         icon={icon}
-        onClick={this.props.handleClick}
+        onClick={!this.props.rolling ? this.props.handleClick : null}
       />
     );
   }

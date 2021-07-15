@@ -27,7 +27,8 @@ class Game extends Component {
         largeStraight: undefined,
         yahtzee: undefined,
         chance: undefined
-      }
+      },
+      rolling: false
     };
     this.roll = this.roll.bind(this);
     this.doScore = this.doScore.bind(this);
@@ -38,12 +39,14 @@ class Game extends Component {
     // roll dice whose indexes are in reroll
     if (this.state.rollsLeft > 0) {
       this.setState(st => ({
+        rolling: true,
         dice: st.dice.map((d, i) =>
           st.locked[i] ? d : Math.ceil(Math.random() * 6)
         ),
         locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
         rollsLeft: st.rollsLeft - 1
       }));
+      setTimeout(() => this.setState({ rolling: false }), 1000)
     }
   }
 
@@ -80,6 +83,7 @@ class Game extends Component {
               dice={this.state.dice}
               locked={this.state.locked}
               handleClick={this.toggleLocked}
+              rolling={this.state.rolling}
             />
             <div className='Game-button-wrapper'>
               <button
