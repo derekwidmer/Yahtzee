@@ -51,7 +51,7 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    this.animateRoll() 
+    this.animateRoll()
   }
 
   animateRoll(evt) {
@@ -83,6 +83,7 @@ class Game extends Component {
 
   render() {
     const disabled = this.state.locked.every(x => x) || this.state.rollsLeft === 0;
+    const rerollText = this.state.rollsLeft === 1 ? 'Reroll Left' : 'Rerolls Left'
     return (
       <div className='Game'>
         <header className='Game-header'>
@@ -101,7 +102,7 @@ class Game extends Component {
                 disabled={disabled}
                 onClick={this.animateRoll}
               >
-                {this.state.rollsLeft} Rerolls Left
+                {!this.state.rolling ? `${this.state.rollsLeft} ${rerollText}` : 'Rolling...'}
               </button>
             </div>
           </section>
